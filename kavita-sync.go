@@ -36,17 +36,20 @@ func main() {
 	}
 	server, err := kavitaapi.CreateServer(c.BaseURL, c.APIKey)
 	if err != nil {
-		log.Fatalf("%v", err)
+		log.Fatalf("Create Server: %v", err)
 	}
 	series, err := server.QueryServer(c.Queries)
 	if err != nil {
-		log.Fatalf("%v", err)
+		log.Fatalf("Query Server: %v", err)
 	}
 	books, err := server.FetchBooks(series)
 	if err != nil {
-		log.Fatalf("%v", err)
+		log.Fatalf("Fetch Books: %v", err)
 	}
 	//log.Println(books)
 
 	err = server.DownloadBooks(books, c.OutputFolder)
+	if err != nil {
+		log.Fatalf("Download books: %v", err)
+	}
 }

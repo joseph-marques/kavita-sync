@@ -3,6 +3,7 @@ package kavitaapi
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"strings"
@@ -36,6 +37,10 @@ func CreateServer(server string, apiKey string) (*Server, error) {
 	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
+	}
+	if resp.StatusCode != 200 {
+		return nil, fmt.Errorf("bad return status %d body %s", resp.StatusCode, string(bodyBytes))
+
 	}
 	err = json.Unmarshal(bodyBytes, &respBody)
 	if err != nil {
