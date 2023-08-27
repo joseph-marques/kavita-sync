@@ -102,6 +102,11 @@ func diffBooks(newBooks []Book, oldBooks []Book) []Book {
 }
 
 func (s *Server) DownloadBooks(books []Book, folder string) error {
+	for i, book := range books {
+		book.RelativePath = fmt.Sprintf("%s.epub", book.ID)
+		books[i] = book
+	}
+
 	folder = strings.TrimRight(folder, "/")
 	indexFile, err := os.Open(folder + "/kavita-books.json")
 	if err != nil && !os.IsNotExist(err) {
@@ -128,8 +133,8 @@ func (s *Server) DownloadBooks(books []Book, folder string) error {
 			log.Printf("Failed to delete %s, %v\n", book.RelativePath, err)
 		}
 	}
-	for i, book := range booksToDownload {
-		book.RelativePath = fmt.Sprintf("%s.epub", book.ID)
+
+	for _, book := range booksToDownload {
 		req, err := http.NewRequest("GET", book.URL, nil)
 		if err != nil {
 			log.Printf("Couldn't make book request %v", err)
@@ -157,7 +162,7 @@ func (s *Server) DownloadBooks(books []Book, folder string) error {
 			log.Printf("Couldn't write to file: %v", err)
 			continue
 		}
-		books[i] = book
+
 	}
 
 	b, err := json.Marshal(books)

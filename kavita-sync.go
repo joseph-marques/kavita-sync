@@ -46,7 +46,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("%v", err)
 	}
-	log.Println(books)
+	//log.Println(books)
 
 	err = server.DownloadBooks(books, c.OutputFolder)
 }

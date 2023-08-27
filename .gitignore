@@ -2,3 +2,5 @@ kavita-sync
 config.yaml
 *.epub
 kavita-books.json
+update-bookshelves/update-bookshelves
+kobo_schema.sql
