@@ -1,0 +1,1 @@
+GOARCH=arm GOOS=linux CGO_ENABLED=1 CC=arm-linux-gnueabihf-gcc CGO_LDFLAGS='-static' go build kavita-sync.go 

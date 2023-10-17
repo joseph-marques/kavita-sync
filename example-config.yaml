@@ -1,0 +1,25 @@
+base_url: https://example.com
+api_key: <EXAMPLE-KEY>
+output_folder: /mnt/onboard/kavita-sync
+queries:
+  - name: "Mystery"
+    filters:
+      - field: Genres
+        comparison: Contains
+        value: 101
+  - name: "Sci-Fi"
+    filters:
+      - field: Genres
+        comparison: Contains
+        value: 53
+  - name: "Non-Fiction"
+    filters:
+      - field: Genres
+        comparison: Contains
+        value: 22
+  - name: "Brandon Sanderson"
+    filters:
+      - field: Writers
+        comparison: Equal
+        value: 14
+
